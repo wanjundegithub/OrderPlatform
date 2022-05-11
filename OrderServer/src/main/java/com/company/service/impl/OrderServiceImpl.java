@@ -1,5 +1,6 @@
 package com.company.service.impl;
 
+import com.company.config.OrderCache;
 import com.company.dao.OrderDao;
 import com.company.model.Order;
 import com.company.service.OrderService;
@@ -19,8 +20,8 @@ public class OrderServiceImpl implements OrderService {
     private OrderDao orderDao;
 
     @Override
-    @Caching(evict = {@CacheEvict(cacheNames = "orderList",allEntries = true)},
-            put = {@CachePut(cacheNames = "order",key = "#order.orderId")})
+    @Caching(evict = {@CacheEvict(cacheNames = "orderList",allEntries = true)})
+    @OrderCache
     public boolean addOrder(Order order) {
         return orderDao.insertOrder(order)==1;
     }
