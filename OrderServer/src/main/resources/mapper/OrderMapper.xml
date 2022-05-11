@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.company.dao.OrderDao">
+
+    <resultMap id="OrderMap" type="com.company.model.Order">
+        <id column="order_id" property="orderId"/>
+        <result column="user_name" property="userName"/>
+        <result column="price_number" property="priceNumber"/>
+        <result column="order_description" property="orderDescription"/>
+    </resultMap>
+
+    <insert id="insertOrder" useGeneratedKeys="true" keyProperty="orderId"
+            parameterType="com.company.model.Order">
+        insert into customer_db.order
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userName != null">user_name,</if>
+            <if test="priceNumber != null">price_number,</if>
+            <if test="orderDescription != null">order_description</if>
+        </trim>
+        <trim prefix=" values (" suffix=" )" suffixOverrides=",">
+            <if test="userName != null">#{userName},</if>
+            <if test="priceNumber != null">#{priceNumber},</if>
+            <if test="orderDescription != null">#{orderDescription}</if>
+        </trim>
+    </insert>
+
+    <delete id="deleteOrderByOrderId" >
+        delete from customer_db.order where order_id=#{id}
+    </delete>
+
+    <select id="selectOrders" resultMap="OrderMap">
+        select * from customer_db.order
+    </select>
+
+    <select id="selectOrderById" resultMap="OrderMap">
+        select * from customer_db.order where order_id=#{id}
+    </select>
+
+    <update id="updateOrder" >
+        update customer_db.order
+        <set>
+            <if test="pojo.userName!= null">user_name = #{pojo.userName},</if>
+            <if test="pojo.priceNumber!= null">price_number = #{pojo.priceNumber},</if>
+            <if test="pojo.orderDescription!= null">order_description= #{pojo.orderDescription}</if>
+        </set>
+        where order_id = #{orderId}
+    </update>
+</mapper>

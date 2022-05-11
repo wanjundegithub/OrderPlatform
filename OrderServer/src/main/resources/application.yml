@@ -1,0 +1,67 @@
+server:
+  port: 9001
+  max-http-header-size: 8192
+
+spring:
+  #数据库链接配置
+  datasource:
+    password: root
+    username: root
+    url: jdbc:mysql://localhost:3306/customer_db?characterEncoding=utf8&useSSL=true
+    name: customer_db
+    #数据库驱动
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    #使用druid监控
+    type: com.alibaba.druid.pool.DruidDataSource
+    #数据库配置
+    dbcp2:
+      initial-size: 2
+      minIdle: 5
+      max-total: 20
+      max-wait-millis: 60000
+      time-between-eviction-runs-millis: 60000
+      soft-min-evictable-idle-time-millis: 300000
+      validation-query: SELECT 1
+      test-while-idle: true
+      test-on-borrow: false
+      pool-prepared-statements: false
+      max-open-prepared-statements: 20
+  jackson:
+    #时间设置为东8区
+    time-zone: GMT+8
+  #redis配置
+  redis:
+    database: 0 # Redis 数据库索引（默认为 0）
+    host: 127.0.0.1 # Redis 服务器地址
+    port: 6379 # Redis 服务器连接端口
+    #password: * # Redis 服务器连接密码（默认为空）
+    lettuce:
+      pool:
+        max-active: 8 # 连接池最大连接数（使用负值表示没有限制） 默认 8
+        max-wait: -1 # 连接池最大阻塞等待时间（使用负值表示没有限制） 默认 -1
+        max-idle: 8 # 连接池中的最大空闲连接 默认 8
+        min-idle: 0 # 连接池中的最小空闲连接 默认 0
+  #缓存配置
+  cache:
+    type: redis
+    redis:
+      cache-null-values: true  # Allow caching null values.
+      key-prefix: # Key prefix.
+      time-to-live: # 缓存到期时间，默认不主动删除永远不到期
+      use-key-prefix: true  # Whether to use the key prefix when writing to Redis.
+  application:
+    name: OrderServer
+
+#服务注册
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://127.0.0.1:8080/eureka/
+mybatis:
+  mapperLocations: classpath:mapper/*.xml
+  typeAliasesPackage: com.company.model
+logging:
+  level:
+     com.company.dao: debug
