@@ -1,13 +1,13 @@
 server:
-  port: 8080
-  address: 127.0.0.1
+  port: 9003
+
 eureka:
   client:
-    fetch-registry: false
-    register-with-eureka: false
+    fetch-registry: true
+    register-with-eureka: true
     service-url:
       defaultZone: http://127.0.0.1:8080/eureka/
 
 spring:
   application:
-    name: RegisterCenter
+    name: OrderServer

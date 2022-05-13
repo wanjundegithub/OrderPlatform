@@ -8,15 +8,15 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="OrderConsumer" />
+        <module name="OrderBackupServer" />
+        <module name="OrderServer" />
         <module name="RegisterCenter" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="OrderServer" target="8" />
-    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="OrderBackupServer" options="-parameters" />
       <module name="OrderConsumer" options="-parameters" />
       <module name="OrderPlatform" options="-parameters" />
       <module name="OrderServer" options="-parameters" />

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.dao.OrderDao">
+
+    <resultMap id="orderResultMap" type="com.company.model.Order">
+        <id column="order_id" property="orderId" />
+        <result column="order_name" property="orderName"/>
+        <result column="order_price" property="orderPrice"/>
+        <result column="user_name" property="userName"/>
+        <result column="order_description" property="orderDescription"/>
+    </resultMap>
+    <select id="selectOrderById" resultType="com.company.model.Order">
+        select * from order_db where order_id=#{orderId}
+    </select>
+</mapper>

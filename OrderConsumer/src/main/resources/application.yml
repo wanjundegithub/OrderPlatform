@@ -1,0 +1,17 @@
+server:
+  port: 9001
+
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://127.0.0.1:8080/eureka/
+
+spring:
+  application:
+    name: Order-Consumer
+
+OrderServer:
+  ribbon:
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
