@@ -11,6 +11,8 @@
     <modules>
         <module>RegisterCenter</module>
         <module>OrderServer</module>
+        <module>KafkaServer</module>
+        <module>KafkaConsumer</module>
     </modules>
 
     <parent>

@@ -1,0 +1,21 @@
+server:
+  port: 9102
+spring:
+  kafka:
+    bootstrap-servers: 127.0.0.1:9092  #bootstrap-servers：连接kafka的地址，多个地址用逗号分隔
+    consumer:
+      group-id: myGroup
+      enable-auto-commit: true
+      auto-commit-interval: 100ms
+      properties:
+        session.timeout.ms: 15000
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      auto-offset-reset: earliest
+#服务注册
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://127.0.0.1:8080/eureka/
